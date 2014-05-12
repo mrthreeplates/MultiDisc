@@ -1,0 +1,9 @@
+1.  Copy the MultiDisc folder (and all of its contents) into the Plugins directory of Logitech's Media Server.  See the information tab under settings to locate your Plugins directory.
+
+2.  Restart LMS.
+
+3.  If installed correctly and enabled, you should see a settings page here:
+
+http://127.0.0.1:9000/plugins/Extensions/settings/plugins/MultiDisc/settings/basic.html
+
+4.  Do a clear and rescan.

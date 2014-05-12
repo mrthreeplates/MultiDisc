@@ -1,0 +1,55 @@
+Multi-Disc plugin for Logitech Media Servier.
+
+Designed to automatically detect cd or disc numbers in album names.  When found, the disc number is removed from the album name and the tags updated so that LMS can treat the discs as a multi-disc set.
+
+A separate setting in LMS (on by default) controls whether or not multi-disc sets are treated as a single album.  In either case, having the MultiDisc plugin correct the tags makes dealing with multi-disc sets much nicer.
+
+Note: this post-processing of the tags could be used for other purposes and/or automatic cleanup/fixes... (TBD).
+
+FYI: Replaces an abandoned patch here:
+
+https://github.com/Logitech/slimserver/pull/18
+
+Examples album names handled by MultiDisc:
+
+"Still Live - Disc 1"
+"Alone Together: The Best of The Mercury Years (Disc 1 of 2)"
+"At the Half Note Café 1960 - CD 1"
+
+When a cd number is found, the plugin sets the disc number tag "DISC" automatically (only if the DISC tag isn't already set).
+
+If an optional number of cds is found (e.g. 1 of N), the plugin sets the disc total tag "DISCC".
+
+Once found, the plugin tries to clean up the album name so that all albums from the same set have identical names (enabling them to be combined).  This is done by removing the cd pattern located earlier and any (now) extraneous or dangling punctuation, and extra white space.
+
+The plugin also removes any leading zeros in the disc number (not really necessary, but nice).
+
+Finally, flag the album as being part of a multi-disc set by appending an optional suffix (e.g. " - Box").
+
+Some multi-disc sets have strange albums names which defeat this approach.  The plugs allows the user to optionally/explicitly set the name looking for a special string in the comment tag. This works with or without the user explicitly adding DISC/DISCC tags.
+
+Here are some example ablum names from multi-disc sets where this may be handy:
+
+"At The Blue Note, The Complete Recordings IV"
+"Unearthed (Disc 1: Who's Gonna Cry)"
+"Unearthed (Disc 2: Trouble in Mind)"
+
+Whenever the album name is modified, the original album name is added to the tag comment.
+
+This plugin does not modify the actual tags of the media file itself, only the tags as stored in LMS's database.
+
+Some of the plugin's features may be controlled by the settings page:
+
+http://127.0.0.1:9000/plugins/Extensions/settings/plugins/MultiDisc/settings/basic.html
+
+TODO:
+
+1. Make the disc/cd regex pattern and album cleanup tunable.  This can be complicated.  Experienced users are probably better off by modifying the code in Plugin.pm to suit their needs.
+
+2. Create a flag (e.g. tag in the comment field) to disable processing of certain files in case the default regex triggers accidentally.
+
+3. Make this plugin work better for international users.
+
+4. Find a cleaner way to create the subclassed file parsers.
+
+5. Automatically trigger a rescan in case a preference changes.
