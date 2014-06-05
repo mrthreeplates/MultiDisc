@@ -24,7 +24,7 @@
 	<name>PLUGIN_MULTI_DISC</name>
 	<module>Plugins::MultiDisc::Plugin</module>
 	<importmodule>Plugins::MultiDisc::Importer</importmodule>
-	<version>1.0</version>
+	<version>1.1</version>
 	<description>PLUGIN_MULTI_DISC_DESC</description>
 	<creator>George Hines</creator>
 
